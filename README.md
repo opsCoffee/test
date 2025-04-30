@@ -41,7 +41,11 @@
 
 3. 启动服务：
    ```bash
+   # 使用默认版本（25.02.4）启动
    docker compose up -d
+
+   # 或指定特定版本
+   ANKI_VERSION=25.02.4 docker compose up -d
    ```
 
 ## 配置说明

@@ -5,9 +5,13 @@ FROM rust:latest as builder
 ARG ANKI_VERSION
 
 # Install build dependencies
-RUN apt-get update && apt-get install -y protobuf-compiler musl-tools \
+RUN apt-get update && apt-get install -y protobuf-compiler musl-tools pkg-config libssl-dev \
     && rm -rf /var/lib/apt/lists/* \
     && rustup target add x86_64-unknown-linux-musl
+
+# Set SSL backend for static linking
+ENV OPENSSL_STATIC=yes
+ENV OPENSSL_DIR=/usr
 
 # Build anki-sync-server with musl
 WORKDIR /usr/src/anki
