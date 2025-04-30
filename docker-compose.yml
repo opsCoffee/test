@@ -24,23 +24,11 @@ services:
       - "8080:8080/tcp"
 
     # 系统优化设置
+    # 基本的网络优化配置
     sysctls:
-      - net.ipv4.tcp_ecn=1
-      - net.ipv4.tcp_ecn_fallback=1
-      - net.ipv4.tcp_dsack=1
-      - net.ipv4.tcp_fack=1
-      - net.ipv4.tcp_sack=1
-      - net.ipv4.conf.all.rp_filter=1
-      - net.ipv4.conf.default.rp_filter=1
-      - net.ipv4.tcp_keepalive_intvl=15
-      - net.ipv4.tcp_keepalive_probes=5
       - net.ipv4.tcp_keepalive_time=75
-      - net.ipv4.tcp_fastopen=3
-      - net.ipv4.tcp_moderate_rcvbuf=1
-      - net.ipv4.tcp_mtu_probing=2
-      - net.ipv4.tcp_syncookies=1
-      - net.ipv4.tcp_timestamps=1
-      - net.ipv4.tcp_window_scaling=1
+      - net.ipv4.tcp_keepalive_probes=5
+      - net.ipv4.tcp_keepalive_intvl=15
 
     # 存储卷设置
     volumes:
