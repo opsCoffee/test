@@ -9,15 +9,14 @@ RUN apt-get update && apt-get install -y protobuf-compiler musl-tools \
     && rm -rf /var/lib/apt/lists/* \
     && rustup target add x86_64-unknown-linux-musl
 
-# Create a new empty cargo project and build anki-sync-server with musl
+# Build anki-sync-server with musl
 WORKDIR /usr/src/anki
-RUN cargo new --bin anki-sync-server \
-    && cd anki-sync-server \
-    && cargo install --git https://github.com/ankitects/anki.git --branch main --tag ${ANKI_VERSION} \
-       --target x86_64-unknown-linux-musl \
-       --root /usr/local \
-       anki-sync-server \
-    && strip /usr/local/bin/anki-sync-server
+RUN cargo install --git https://github.com/ankitects/anki.git \
+    --branch main \
+    --tag ${ANKI_VERSION} \
+    --target x86_64-unknown-linux-musl \
+    anki-sync-server \
+    && strip /usr/local/cargo/bin/anki-sync-server
 
 FROM scratch
 
